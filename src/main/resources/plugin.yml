@@ -1,0 +1,7 @@
+name: BorderGames
+version: '${project.version}'
+main: de.webcode.bordergames.BorderGames
+api-version: 1.17
+prefix: BORDERGAMES
+authors: [ TheWebcode ]
+description: Der BorderGames Plugin
