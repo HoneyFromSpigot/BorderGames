@@ -4,6 +4,7 @@ import de.webcode.bordergames.event.EventManager;
 import de.webcode.bordergames.event.Listener;
 import de.webcode.bordergames.event.impl.GameStartEvent;
 import de.webcode.bordergames.utils.Filemanager;
+import de.webcode.bordergames.utils.LocationManager;
 import de.webcode.bordergames.utils.ThreadManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;

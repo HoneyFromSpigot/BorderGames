@@ -1,5 +1,6 @@
 package de.webcode.bordergames.utils;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -17,17 +18,36 @@ public class Filemanager {
         this.playerDataFile = new File(FOLDER, "playerData.yml");
 
         try {
+            boolean setupCfg = false;
+
             if (!FOLDER.exists()) FOLDER.mkdirs();
-            if (!cfgFile.exists()) cfgFile.createNewFile();
+            if (!cfgFile.exists()){
+                setupCfg = true;
+                cfgFile.createNewFile();
+            }
             if (!playerDataFile.exists()) playerDataFile.createNewFile();
             if (!playerSettingsFile.exists()) playerSettingsFile.createNewFile();
 
             cfg = YamlConfiguration.loadConfiguration(cfgFile);
             playerData = YamlConfiguration.loadConfiguration(playerDataFile);
             playerSettings = YamlConfiguration.loadConfiguration(playerSettingsFile);
+
+            if (setupCfg) {
+                cfg.set("Messgae.Prefix", "&8[&3&lBORDERGAMES&8]");
+                cfg.set("Locations.Game.Lobby.X", 0);
+                cfg.set("Locations.Game.Lobby.Y", 60);
+                cfg.set("Locations.Game.Lobby.Z", 0);
+                cfg.set("Locations.Game.Lobby.World", "world");
+
+                saveFiles();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getStringColorTranslated(String path){
+        return ChatColor.translateAlternateColorCodes('&', cfg.getString(path));
     }
 
     public void saveFiles() {
