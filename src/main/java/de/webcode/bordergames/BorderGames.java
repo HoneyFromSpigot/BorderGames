@@ -1,8 +1,10 @@
 package de.webcode.bordergames;
 
+import de.webcode.bordergames.commands.BGGetPlayerCount;
 import de.webcode.bordergames.event.EventManager;
 import de.webcode.bordergames.event.Listener;
 import de.webcode.bordergames.event.impl.GameStartEvent;
+import de.webcode.bordergames.game.Game;
 import de.webcode.bordergames.utils.Filemanager;
 import de.webcode.bordergames.utils.LocationManager;
 import de.webcode.bordergames.utils.ThreadManager;
@@ -16,6 +18,7 @@ public final class BorderGames extends JavaPlugin {
     private Filemanager filemanager;
     private Listener eventListener;
     private ThreadManager threadManager;
+    private Game game;
 
     @Override
     public void onEnable() {
@@ -23,6 +26,7 @@ public final class BorderGames extends JavaPlugin {
 
         this.filemanager = new Filemanager();
         this.eventListener = new Listener();
+        this.game = new Game();
 
         registerCommands();
         registerEvents();
@@ -31,7 +35,7 @@ public final class BorderGames extends JavaPlugin {
     }
 
     private void registerCommands() {
-
+        getCommand("bgplayercount").setExecutor(new BGGetPlayerCount());
     }
 
     private void registerEvents() {
@@ -39,6 +43,10 @@ public final class BorderGames extends JavaPlugin {
 
         EventManager.register(eventListener);
         pm.registerEvents(eventListener, this);
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     public Filemanager getFilemanager() {

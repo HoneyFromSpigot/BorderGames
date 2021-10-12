@@ -5,3 +5,5 @@ api-version: 1.17
 prefix: BORDERGAMES
 authors: [ TheWebcode ]
 description: Der BorderGames Plugin
+commands:
+  bgplayercount:

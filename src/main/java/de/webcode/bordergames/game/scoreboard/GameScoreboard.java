@@ -1,15 +1,18 @@
 package de.webcode.bordergames.game.scoreboard;
 
 import de.webcode.bordergames.BorderGames;
+import de.webcode.bordergames.game.Game;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class GameScoreboard extends ScoreboardBuilder{
     private int socialId;
+    private Game game;
 
-    public GameScoreboard() {
-        super(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "  twitch.tv/DerBanko  ");
+    public GameScoreboard(Game game) {
+        super(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "  BORDERGAMES");
+        this.game = game;
         socialId = 0;
 
         run();
@@ -17,13 +20,12 @@ public class GameScoreboard extends ScoreboardBuilder{
 
     @Override
     public void createScoreboard() {
-        setScore("test", 8);
         setScore(ChatColor.DARK_GRAY.toString(), 7);
-        setScore(ChatColor.GRAY + "Dein Rang" + ChatColor.DARK_GRAY + ":", 6);
+        setScore(ChatColor.DARK_GRAY + "Spieleranzahl : " + "0 / 0", 6);
         setScore(ChatColor.GRAY.toString(), 4);
-        setScore(ChatColor.AQUA + "twitter.com/DerBanko", 3);
+        setScore(ChatColor.DARK_GRAY + "Mapgröße: ", 3);
         setScore(ChatColor.RED.toString(), 2);
-        setScore(ChatColor.AQUA.toString(), 0);
+        setScore(ChatColor.DARK_GRAY + "Zeit: ", 0);
     }
 
     @Override
@@ -38,13 +40,8 @@ public class GameScoreboard extends ScoreboardBuilder{
 
                 switch (socialId) {
                     case 0:
-                        setScore(ChatColor.AQUA + "twitter.com/DerBanko", 3);
-                        break;
-                    case 1:
-                        setScore(ChatColor.DARK_PURPLE + "twitch.tv/DerBanko", 3);
-                        break;
-                    case 2:
-                        setScore(ChatColor.DARK_RED + "youtube.com/DerBanko", 3);
+                        setScore(ChatColor.DARK_GRAY + "Spieleranzahl: " + game.getRemainingPlayerString(), 6);
+                        setScore(ChatColor.DARK_GRAY + "Mapgröße: §e" + game.getBorderSizeString(), 3);
                         break;
                 }
 

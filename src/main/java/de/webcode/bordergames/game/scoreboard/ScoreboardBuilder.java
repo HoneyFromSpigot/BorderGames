@@ -25,6 +25,10 @@ public abstract class ScoreboardBuilder {
 
     public abstract void update();
 
+    public Scoreboard getScoreboard() {
+        return scoreboard;
+    }
+
     public void setDisplayName(String displayName) {
         this.objective.setDisplayName(displayName);
     }
