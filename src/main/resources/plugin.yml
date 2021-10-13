@@ -7,3 +7,4 @@ authors: [ TheWebcode ]
 description: Der BorderGames Plugin
 commands:
   bgplayercount:
+  bgiswaiting:
