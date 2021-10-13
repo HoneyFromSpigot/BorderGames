@@ -8,3 +8,5 @@ description: Der BorderGames Plugin
 commands:
   bgplayercount:
   bgiswaiting:
+  bgsetarena:
+  bgsetlobby:

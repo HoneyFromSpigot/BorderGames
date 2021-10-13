@@ -7,21 +7,17 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class LocationManager {
     private Location gameLobby;
+    private Location gameArena;
 
     public LocationManager() {
         YamlConfiguration cfg = BorderGames.INSTANCE.getFilemanager().getCfg();
-        this.gameLobby = new Location(Bukkit.getWorld(cfg.getString("Locations.Game.Lobby.World")), cfg.getInt("Locations.Game.X"), cfg.getInt("Locations.Game.Lobby.Y"), cfg.getInt("Locations.Game.Lobby.Z"));
-
-
+        this.gameLobby = new Location(Bukkit.getWorld(cfg.getString("Locations.Game.Lobby.World")), cfg.getInt("Locations.Game.Lobby.X"), cfg.getInt("Locations.Game.Lobby.Y"), cfg.getInt("Locations.Game.Lobby.Z"));
+        this.gameArena = new Location(Bukkit.getWorld(cfg.getString("Locations.Game.Arena.World")), cfg.getInt("Locations.Game.Arena.X"), cfg.getInt("Locations.Game.Arena.Y"), cfg.getInt("Locations.Game.Arena.Z"));
     }
 
-    public Location getArenaSpawnLocation(int arenaID, int spawnID) {
-        YamlConfiguration cfg = BorderGames.INSTANCE.getFilemanager().getCfg();
-
-        return new Location(Bukkit.getWorld(cfg.getString("Locations.Game.Arena." + arenaID + "." + spawnID + ".World")), cfg.getInt("Locations.Game.Arena." + arenaID + "." + spawnID + ".X"), cfg.getInt("Locations.Game.Arena." + arenaID + "." + spawnID + ".Y"), cfg.getInt("Locations.Game.Arena." + arenaID + "." + spawnID + ".Z"));
+    public Location getGameArena() {
+        return gameArena;
     }
-
-
 
     public Location getGameLobby() {
         return gameLobby;
