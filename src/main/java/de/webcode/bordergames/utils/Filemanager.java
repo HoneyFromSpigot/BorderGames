@@ -42,6 +42,10 @@ public class Filemanager {
                 cfg.set("Locations.Game.Arena.Y", 60);
                 cfg.set("Locations.Game.Arena.Z", 0);
                 cfg.set("Locations.Game.Arena.World", "world");
+                cfg.set("Locations.Game.Spawn.X", 0);
+                cfg.set("Locations.Game.Spawn.Y", 60);
+                cfg.set("Locations.Game.Spawn.Z", 0);
+                cfg.set("Locations.Game.Spawn.World", "world");
                 cfg.set("Locations.Game.World", "world");
 
                 saveFiles();

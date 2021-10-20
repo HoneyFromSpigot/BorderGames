@@ -1,9 +1,6 @@
 package de.webcode.bordergames;
 
-import de.webcode.bordergames.commands.BGGetPlayerCount;
-import de.webcode.bordergames.commands.BGIsWaiting;
-import de.webcode.bordergames.commands.BGSetArena;
-import de.webcode.bordergames.commands.BGSetLobby;
+import de.webcode.bordergames.commands.*;
 import de.webcode.bordergames.event.EventManager;
 import de.webcode.bordergames.event.Listener;
 import de.webcode.bordergames.event.impl.GameStartEvent;
@@ -41,7 +38,9 @@ public final class BorderGames extends JavaPlugin {
         getCommand("bgplayercount").setExecutor(new BGGetPlayerCount());
         getCommand("bgiswaiting").setExecutor(new BGIsWaiting());
         getCommand("bgsetlobby").setExecutor(new BGSetLobby());
+        getCommand("bgstartgamenow").setExecutor(new BGStartGameNow());
         getCommand("bgsetarena").setExecutor(new BGSetArena());
+        getCommand("bgsetspawn").setExecutor(new BGSetPlayerSpawnpoint());
     }
 
     private void registerEvents() {

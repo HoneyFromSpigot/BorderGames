@@ -10,3 +10,5 @@ commands:
   bgiswaiting:
   bgsetarena:
   bgsetlobby:
+  bgstartgamenow:
+  bgsetspawn:

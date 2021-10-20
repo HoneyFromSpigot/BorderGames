@@ -8,6 +8,7 @@ import de.webcode.bordergames.game.Game;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -30,6 +31,7 @@ public class Listener implements org.bukkit.event.Listener {
         }
 
     }
+
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event){

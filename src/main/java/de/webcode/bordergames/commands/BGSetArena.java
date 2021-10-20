@@ -31,6 +31,8 @@ public class BGSetArena implements CommandExecutor {
             cfg.set("Locations.Game.Arena.Y", y);
             cfg.set("Locations.Game.Arena.Z", z);
 
+            player.sendMessage("§aDu hast die §6Arena §agesetzt! §8(§e" + x + " " + y + " " + z + " :" + s + "§8)");
+
             BorderGames.INSTANCE.getFilemanager().saveFiles();
         }
         return false;

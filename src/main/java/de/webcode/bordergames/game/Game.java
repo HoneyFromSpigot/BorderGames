@@ -7,7 +7,6 @@ import de.webcode.bordergames.utils.LocationManager;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.EntityEffect;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -27,8 +26,8 @@ public class Game {
     private int maxPlayerCount = 2;
     private int startingCountdown = 10;
     private int startBorderSize = 100;
-    private int secondsForFight = 60; // 5 Minutes = 300
-    private int secondsToNextHour = 60; //1 Hour = 3600 Seconds
+    private int secondsForFight = 300; // 5 Minutes = 300
+    private int secondsToNextHour = 900; //1 Hour = 3600 Seconds
     private boolean started;
     private boolean inFight;
     private boolean disableMove;
@@ -76,8 +75,10 @@ public class Game {
     }
 
     public void startGame(){
-        //TODO: Teleport Players
         this.started = true;
+        for(Player player : players){
+            player.teleport(locationManager.getGameSpawn());
+        }
         this.disableMove = false;
         inFight = false;
         this.worldTimer = new BukkitRunnable() {
@@ -96,15 +97,20 @@ public class Game {
     }
 
     public void prepareFight(){
-        inFight = true;
+        inFight = false;
         disableMove = true;
 
         new BukkitRunnable() {
-            int countdown = 5;
+            int countdown = 10;
 
             @Override
             public void run() {
                 if (countdown > 0) {
+                    if(countdown == 5){
+                        for(Player player : players){
+                            player.teleport(locationManager.getGameArena());
+                        }
+                    }
                     for (Player player : players) {
                         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§aKampf beginnt in: §6" + countdown));
                     }
@@ -123,6 +129,7 @@ public class Game {
     public void startFight(){
         inFight = true;
         disableMove = false;
+
         this.fightTimer = new BukkitRunnable() {
             int prefSecs = secondsForFight;
 
@@ -133,6 +140,7 @@ public class Game {
                 }else{
                     cancel();
                     secondsForFight = prefSecs;
+                    world.getWorldBorder().setSize(world.getWorldBorder().getSize() + 20);
                     startGame();
                 }
             }
@@ -165,7 +173,10 @@ public class Game {
         }
 
         if (!isStarted()) {
-            startingTimer.cancel();
+            if (startingTimer != null) {
+                startingTimer.cancel();
+            }
+
             this.startingCountdown = 10;
             for (Player p : players) {
                 p.sendMessage("§cStart abgebrochen!");
@@ -195,7 +206,6 @@ public class Game {
 
             @Override
             public void run() {
-
                 if(countdown > 0){
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         player.sendMessage("§cDie Map wird in §6" + countdown + " Sekunden §cresetet!");
